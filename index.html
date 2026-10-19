@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8fa" />
+  <title>貸回來了沒？｜MortgageHub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="貸回來了沒？首頁">
+        <span class="brand-mark">M</span>
+        <span><strong>MortgageHub</strong><small>貸回來了沒？</small></span>
+      </a>
+      <div class="workspace-label">工作空間</div>
+      <nav class="main-nav" aria-label="主要導覽">
+        <button class="nav-link active" data-view="dashboard"><span class="nav-icon">▦</span>案件總覽</button>
+        <button class="nav-link" data-view="cases"><span class="nav-icon">▤</span>所有案件 <span class="nav-count" id="navCaseCount">0</span></button>
+        <button class="nav-link" data-view="reminders"><span class="nav-icon">◷</span>待追蹤 <span class="nav-dot"></span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-icon">✦</span><strong>讓追蹤更簡單</strong><p>每家銀行的進度和期限，都在同一個地方。</p></div>
+        <button class="profile" id="profileSettings" aria-label="開啟個人化設定"><span class="avatar profile-avatar">林</span><span class="profile-copy"><strong id="profileName">林地政士</strong><small>個人化設定</small></span><span class="more">⚙</span></button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuToggle" aria-label="開啟導覽">☰</button>
+        <div class="breadcrumb">工作空間 <span>/</span> <strong id="breadcrumbTitle">案件總覽</strong></div>
+        <div class="top-actions"><span class="today-label" id="todayLabel"></span><button class="icon-button bell-button" id="reminderBell" aria-label="提醒通知：開啟待追蹤清單" title="提醒通知／開啟待追蹤清單"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i id="bellDot"></i></button><span class="avatar top-avatar profile-avatar">林</span></div>
+      </header>
+
+      <section class="page-wrap" id="dashboardView">
+        <div class="page-heading">
+          <div><div class="eyebrow">工作概況</div><h1><span id="greetingTime">早安</span>，<span id="greetingName">林地政士</span> <span class="wave">✳</span></h1><p>案件進度一目瞭然，重要回覆不再漏接。</p></div>
+          <button class="button button-primary" id="newCaseBtn"><span>＋</span> 建立新案件</button>
+        </div>
+
+        <div class="metric-grid">
+          <button type="button" class="metric-card metric-link" data-metric-action="active" aria-label="查看所有進行中案件"><div class="metric-top"><span>進行中案件</span><span class="metric-icon purple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v15H4zM8 3v4m8-4v4M8 11h8m-8 4h5"/></svg></span></div><strong id="metricActive">0</strong><small><span class="metric-subtle">點擊查看進行中案件</span></small></button>
+          <button type="button" class="metric-card metric-link" data-metric-action="waiting" aria-label="查看等待銀行回覆的案件"><div class="metric-top"><span>等待銀行回覆</span><span class="metric-icon amber"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div><strong id="metricWaiting">0</strong><small><span class="metric-subtle">家銀行尚未回覆</span></small></button>
+          <button type="button" class="metric-card metric-link" data-metric-action="followup" aria-label="查看需要追蹤的銀行"><div class="metric-top"><span>需要追蹤</span><span class="metric-icon rose"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-8 3v3m0 2h.01"/></svg></span></div><strong id="metricFollowup">0</strong><small><span class="metric-subtle">已進入期限前兩天提醒</span></small></button>
+          <button type="button" class="metric-card metric-link" data-metric-action="broker" aria-label="查看待回覆房仲的案件"><div class="metric-top"><span>待回覆房仲</span><span class="metric-icon blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-4 2 1.4-4.1A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11h8m-8 3h5"/></svg></span></div><strong id="metricBroker">0</strong><small><span class="metric-subtle">銀行結果已整理完成</span></small></button>
+        </div>
+
+        <section class="panel followup-panel" id="followupPanel">
+          <div class="panel-heading"><div class="heading-icon amber-bg"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h2>追蹤提醒</h2><p id="followupSubtitle">依照回覆期限，安排今天的追蹤</p></div><button class="text-button" id="seeReminders">查看全部 <span>→</span></button></div>
+          <div id="followupList" class="followup-list"></div>
+        </section>
+
+        <section class="panel cases-panel">
+          <div class="panel-heading cases-heading"><div><h2>最近案件</h2><p>查看詢價進度與最新回覆</p></div><button class="text-button" id="seeAllCases">所有案件 <span>→</span></button></div>
+          <div class="table-wrap"><table><thead><tr><th>案件 / 物件</th><th>詢價銀行</th><th>回覆進度</th><th>最早回覆期限</th><th>房仲通知</th><th></th></tr></thead><tbody id="caseRows"></tbody></table></div>
+          <div class="empty-state hidden" id="emptyCases"><div class="empty-illustration">⌂</div><h3>還沒有案件</h3><p>建立第一筆案件，開始追蹤銀行詢價進度。</p><button class="button button-primary" id="emptyNewCase">建立案件</button></div>
+        </section>
+        <footer class="page-footer"><span>MortgageHub</span><span>第一版原型・資料儲存在此瀏覽器</span></footer>
+      </section>
+
+      <section class="page-wrap hidden" id="casesView">
+        <div class="page-heading"><div><div class="eyebrow">案件管理</div><h1>所有案件</h1><p>集中管理物件詢價與銀行回覆。</p></div><div class="heading-actions"><button class="button button-quiet" id="exportCsvBtn">⇩ 匯出 CSV</button><button class="button button-primary" id="newCaseBtn2"><span>＋</span> 建立新案件</button></div></div>
+        <div class="toolbar"><label class="search-box"><span>⌕</span><input id="caseSearch" type="search" placeholder="搜尋案件、地址或房仲" /></label><div class="filter-pills"><button class="filter-pill active" data-filter="all">全部 <span id="filterAllCount">0</span></button><button class="filter-pill" data-filter="active">進行中</button><button class="filter-pill" data-filter="completed">已完成</button><button class="filter-pill" data-filter="waiting">待銀行回覆</button><button class="filter-pill" data-filter="broker">待回覆房仲</button></div></div>
+        <section class="panel cases-panel"><div class="table-wrap"><table><thead><tr><th>案件 / 物件</th><th>詢價銀行</th><th>回覆進度</th><th>最早回覆期限</th><th>房仲通知</th><th></th></tr></thead><tbody id="allCaseRows"></tbody></table></div><div class="empty-state hidden" id="emptySearch"><div class="empty-illustration">⌕</div><h3>找不到符合的案件</h3><p>試試其他關鍵字或篩選條件。</p></div></section>
+        <footer class="page-footer"><span>MortgageHub</span><span>第一版原型・資料儲存在此瀏覽器</span></footer>
+      </section>
+
+      <section class="page-wrap hidden" id="remindersView">
+        <div class="page-heading"><div><div class="eyebrow">追蹤管理</div><h1>待追蹤清單</h1><p>依照各銀行回覆期限，掌握需要跟進的詢價。</p></div></div>
+        <div class="reminder-summary" id="reminderSummary"></div>
+        <section class="panel"><div class="panel-heading"><div><h2>尚未回覆</h2><p>期限前兩天開始提醒；請透過 LINE 手動追蹤銀行。</p></div></div><div id="allReminderList" class="followup-list expanded"></div><div class="empty-state hidden" id="emptyReminders"><div class="empty-illustration">✓</div><h3>目前沒有待追蹤項目</h3><p>銀行回覆期限接近時，提醒會顯示在這裡。</p></div></section>
+        <footer class="page-footer"><span>MortgageHub</span><span>第一版原型・資料儲存在此瀏覽器</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="overlay hidden" id="modalOverlay" aria-hidden="true"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><div class="eyebrow" id="modalEyebrow">新案件</div><h2 id="modalTitle">建立詢價案件</h2></div><button class="icon-button close-modal" id="closeModal" aria-label="關閉">×</button></div><div id="modalBody"></div></section></div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+
