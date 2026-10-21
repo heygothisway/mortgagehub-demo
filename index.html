@@ -28,7 +28,7 @@
 
     <main class="main-content">
       <header class="topbar">
-        <button class="icon-button mobile-menu" id="menuToggle" aria-label="開啟導覽">☰</button>
+        <button class="icon-button mobile-menu" id="menuToggle" aria-label="收合側欄" title="收合／展開導覽">☰</button>
         <div class="breadcrumb">工作空間 <span>/</span> <strong id="breadcrumbTitle">案件總覽</strong></div>
         <div class="top-actions"><span class="today-label" id="todayLabel"></span><button class="icon-button bell-button" id="reminderBell" aria-label="提醒通知：開啟待追蹤清單" title="提醒通知／開啟待追蹤清單"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i id="bellDot"></i></button><span class="avatar top-avatar profile-avatar">林</span></div>
       </header>
@@ -53,7 +53,7 @@
 
         <section class="panel cases-panel">
           <div class="panel-heading cases-heading"><div><h2>最近案件</h2><p>查看詢價進度與最新回覆</p></div><button class="text-button" id="seeAllCases">所有案件 <span>→</span></button></div>
-          <div class="table-wrap"><table><thead><tr><th>案件 / 物件</th><th>詢價銀行</th><th>回覆進度</th><th>最早回覆期限</th><th>房仲通知</th><th></th></tr></thead><tbody id="caseRows"></tbody></table></div>
+          <div class="table-wrap"><table><thead><tr><th>案件 / 物件</th><th>預估成交價</th><th>詢價銀行</th><th>回覆進度</th><th>最早回覆期限</th><th>房仲通知</th><th></th></tr></thead><tbody id="caseRows"></tbody></table></div>
           <div class="empty-state hidden" id="emptyCases"><div class="empty-illustration">⌂</div><h3>還沒有案件</h3><p>建立第一筆案件，開始追蹤銀行詢價進度。</p><button class="button button-primary" id="emptyNewCase">建立案件</button></div>
         </section>
         <footer class="page-footer"><span>MortgageHub</span><span>第一版原型・資料儲存在此瀏覽器</span></footer>
@@ -62,7 +62,7 @@
       <section class="page-wrap hidden" id="casesView">
         <div class="page-heading"><div><div class="eyebrow">案件管理</div><h1>所有案件</h1><p>集中管理物件詢價與銀行回覆。</p></div><div class="heading-actions"><button class="button button-quiet" id="exportCsvBtn">⇩ 匯出 CSV</button><button class="button button-primary" id="newCaseBtn2"><span>＋</span> 建立新案件</button></div></div>
         <div class="toolbar"><label class="search-box"><span>⌕</span><input id="caseSearch" type="search" placeholder="搜尋案件、地址或房仲" /></label><div class="filter-pills"><button class="filter-pill active" data-filter="all">全部 <span id="filterAllCount">0</span></button><button class="filter-pill" data-filter="active">進行中</button><button class="filter-pill" data-filter="completed">已完成</button><button class="filter-pill" data-filter="waiting">待銀行回覆</button><button class="filter-pill" data-filter="broker">待回覆房仲</button></div></div>
-        <section class="panel cases-panel"><div class="table-wrap"><table><thead><tr><th>案件 / 物件</th><th>詢價銀行</th><th>回覆進度</th><th>最早回覆期限</th><th>房仲通知</th><th></th></tr></thead><tbody id="allCaseRows"></tbody></table></div><div class="empty-state hidden" id="emptySearch"><div class="empty-illustration">⌕</div><h3>找不到符合的案件</h3><p>試試其他關鍵字或篩選條件。</p></div></section>
+        <section class="panel cases-panel"><div class="table-wrap"><table><thead><tr><th>案件 / 物件</th><th>預估成交價</th><th>詢價銀行</th><th>回覆進度</th><th>最早回覆期限</th><th>房仲通知</th><th></th></tr></thead><tbody id="allCaseRows"></tbody></table></div><div class="empty-state hidden" id="emptySearch"><div class="empty-illustration">⌕</div><h3>找不到符合的案件</h3><p>試試其他關鍵字或篩選條件。</p></div></section>
         <footer class="page-footer"><span>MortgageHub</span><span>第一版原型・資料儲存在此瀏覽器</span></footer>
       </section>
 
